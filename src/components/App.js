@@ -7,6 +7,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      usuarios:[]
+    }
+  }
+
+  componentDidMount(){
+    this.setState({
       usuarios: [
         {
           nombre: 'Erlinda',
@@ -19,8 +25,9 @@ class App extends Component {
           enlace: 'Platzi.com'
         }
       ]
-    }
+    })
   }
+
   //ya no es necesario const
   ponerFilas = () => (
     this.state.usuarios.map(usuario => (
@@ -34,6 +41,7 @@ class App extends Component {
   );
   //necesito poner dentro de un render
   render() {
+    console.log(this.state.usuarios);
     return (
       <div className="margen">
         <table className="tabla">
