@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; //import Component
+import axios from 'axios';
 
 
 //cambiar const por class
@@ -11,7 +12,12 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
+  async componentDidMount(){
+
+     const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
+     console.log(respuesta);
+     
+
     this.setState({
       usuarios: [
         {
