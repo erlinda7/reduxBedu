@@ -1,61 +1,16 @@
-import React, { Component } from 'react'; //import Component
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter , Route} from 'react-router-dom';
 
+import Menu from './Menu';
+import Usuarios from './Usuarios';
+const Tareas =() =><div>Tareas</div>
 
-//cambiar const por class
-class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      usuarios: []
-    }
-  }
-
-  async componentDidMount() {
-
-    const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-
-
-    this.setState({
-      usuarios: respuesta.data
-    })
-  }
-
-  //ya no es necesario const
-  ponerFilas = () => (
-    this.state.usuarios.map(usuario => (
-      <tr key={usuario.id}>
-        <td>{usuario.name}</td>
-        <td>{usuario.email}</td>
-        <td>{usuario.website}</td>
-      </tr>
-    )
-    )
-  );
-  //necesito poner dentro de un render
-  render() {
-    return (
-      <div className="margen">
-        <table className="tabla">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Enlace</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              /*se necesita this para llamar */
-              this.ponerFilas()
-            }
-          </tbody>
-        </table>
-      </div>
-    )
-  }
-}
-
-
+const App = () =>(
+  // deja navegar entre las pantallas
+  <BrowserRouter> 
+    <Menu/>
+    <Route exact path='/' component={Usuarios}/>
+    <Route exact path='/tareas' component={Tareas}/>
+  </BrowserRouter>
+)
 export default App;
