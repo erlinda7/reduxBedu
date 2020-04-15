@@ -5,9 +5,12 @@ import {Provider } from 'react-redux';
 import './index.css';
 import App from './components/App';
 
+
+import  reducers from './reducers';
+
 //necesito crear el store al que se lo voy proveer toda mi aplicacion
 const store = createStore (
-  {},//todos los reducres de mi aplicacion
+  reducers,//todos los reducres de mi aplicacion
   {} //el estado  inicial
 );
 
