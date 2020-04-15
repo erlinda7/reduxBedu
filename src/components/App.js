@@ -1,39 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react'; //import Component
 
 
-const App = () => {
+//cambiar const por class
+class App extends Component {
 
-  const ponerFilas = () => [
-    <tr>
-      <td>Erlinda</td>
-      <td>linda@gmail.com</td>
-      <td>Erlinda.com</td>
-    </tr>,
-    <tr>
-      <td>Platzi</td>
-      <td>platzi@gmail.com</td>
-      <td>Plazti.com</td>
-    </tr>
-  ]
-
-  return (
-    <div className="margen">
-      <table className="tabla">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Enlace</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-           ponerFilas()
-          }
-        </tbody>
-      </table>
-    </div>
-  )
+  constructor() {
+    super();
+    this.state = {
+      usuarios: [
+        {
+          nombre: 'Erlinda',
+          correo: 'erlinda@gamil.com',
+          enlace: 'Erlinda.com'
+        },
+        {
+          nombre: 'Platzi',
+          correo: 'platzi@gamil.com',
+          enlace: 'Platzi.com'
+        }
+      ]
+    }
+  }
+  //ya no es necesario const
+  ponerFilas = () => (
+    this.state.usuarios.map(usuario => (
+      <tr>
+        <td>{usuario.nombre}</td>
+        <td>{usuario.correo}</td>
+        <td>{usuario.enlace}</td>
+      </tr>
+      )
+    )
+  );
+  //necesito poner dentro de un render
+  render() {
+    return (
+      <div className="margen">
+        <table className="tabla">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Enlace</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              /*se necesita this para llamar */
+              this.ponerFilas()
+            }
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 }
 
 
