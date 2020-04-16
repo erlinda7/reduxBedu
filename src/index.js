@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk'// para usar temas de asincronia
 
 import './css/index.css';
+import './css/iconos.css';
 import App from './components/App';
 
 
