@@ -12,7 +12,7 @@ export const traerTodos = () => async (dispatch) => {
     })
 
     try {
-        const respuesta = await axios.get('https://jsonplaceholder.typicode.com/userss');
+        const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
 
         dispatch({
             type: TRAER_TODOS,  //en usuariosReducer hay un caso que es 'traer_usuarios' a este es a quien quiero llamar

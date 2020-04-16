@@ -6,6 +6,7 @@ import * as usuariosActions from '../../actions/UsuariosActions';
 
 import Spinner from '../general/Spinner';
 import Fatal from '../general/Fatal';
+import Tabla from './Tabla';
 
 //cambiar const por class
 class Usuarios extends Component {
@@ -26,40 +27,16 @@ class Usuarios extends Component {
       return <Fatal mensaje={this.props.error}/>
     }
 
-    return (
-      <table className="tabla">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Enlace</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            /*se necesita this para llamar */
-            this.ponerFilas()
-          }
-        </tbody>
-      </table>
-    )
+    // return <Tabla usuarios={this.props.usuarios}/> porque mandar props si componente tabla puede conectarse con redux y mapear reducir
+    return <Tabla/>
   }
 
-  //ya no es necesario const
-  ponerFilas = () => (
-    this.props.usuarios.map(usuario => (
-      <tr key={usuario.id}>
-        <td>{usuario.name}</td>
-        <td>{usuario.email}</td>
-        <td>{usuario.website}</td>
-      </tr>
-    )
-    )
-  );
+
   //necesito poner dentro de un render
   render() {
     return (
       <div>
+        <h1>Usuarios</h1>
         {this.ponerContenido()}
       </div>
     )
