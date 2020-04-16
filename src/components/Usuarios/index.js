@@ -3,6 +3,9 @@ import React, { Component } from 'react'; //import Component
 import { connect } from 'react-redux';//para poder conectar nuestro reducer al componente
 import * as usuariosActions from '../../actions/UsuariosActions';
 
+
+import Spinner from '../general/Spinner';
+
 //cambiar const por class
 class Usuarios extends Component {
 
@@ -10,7 +13,31 @@ class Usuarios extends Component {
   async componentDidMount() {
 
     this.props.traerTodos();  //llamando a la accion creators
-    
+
+  }
+
+  ponerContenido = () => {
+    if(this.props.cargando){
+      return <Spinner/>
+    }
+
+    return (
+      <table className="tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Enlace</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            /*se necesita this para llamar */
+            this.ponerFilas()
+          }
+        </tbody>
+      </table>
+    )
   }
 
   //ya no es necesario const
@@ -28,21 +55,7 @@ class Usuarios extends Component {
   render() {
     return (
       <div>
-        <table className="tabla">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Enlace</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              /*se necesita this para llamar */
-              this.ponerFilas()
-            }
-          </tbody>
-        </table>
+        {this.ponerContenido()}
       </div>
     )
   }
@@ -56,7 +69,7 @@ const mapStateToProps = (reducers) => {
 
 
 //conectando al almacenamiento global
-export default connect(mapStateToProps, usuariosActions )(Usuarios);
+export default connect(mapStateToProps, usuariosActions)(Usuarios);
 //parametros que debe recibir el connect
   //1ro: 
       //todos los reducers que el proveedor le va entregar al usuario,
