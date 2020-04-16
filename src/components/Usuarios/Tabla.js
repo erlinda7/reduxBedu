@@ -13,7 +13,7 @@ const Tabla = (props) => {//porque traer los props de padre si puedo conectar co
             <td>{usuario.website}</td>
             <td>
                 <Link to={`/publicaciones/${key}`}>
-                    <div class="eye-solid icon"></div>
+                    <div className="eye-solid icon"></div>
                 </Link>
             </td>
         </tr>
