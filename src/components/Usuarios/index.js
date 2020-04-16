@@ -5,6 +5,7 @@ import * as usuariosActions from '../../actions/UsuariosActions';
 
 
 import Spinner from '../general/Spinner';
+import Fatal from '../general/Fatal';
 
 //cambiar const por class
 class Usuarios extends Component {
@@ -19,6 +20,10 @@ class Usuarios extends Component {
   ponerContenido = () => {
     if(this.props.cargando){
       return <Spinner/>
+    }
+
+    if(this.props.error){
+      return <Fatal mensaje={this.props.error}/>
     }
 
     return (

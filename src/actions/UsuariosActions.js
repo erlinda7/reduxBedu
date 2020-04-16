@@ -12,7 +12,7 @@ export const traerTodos = () => async (dispatch) => {
     })
 
     try {
-        const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
+        const respuesta = await axios.get('https://jsonplaceholder.typicode.com/userss');
 
         dispatch({
             type: TRAER_TODOS,  //en usuariosReducer hay un caso que es 'traer_usuarios' a este es a quien quiero llamar
@@ -22,7 +22,7 @@ export const traerTodos = () => async (dispatch) => {
         console.log('Error:', error.message);
         dispatch({
             type: ERROR,
-            payload: error.message
+            payload: 'Algo salio mal, intente mas tarde'
         }
         )
     }
