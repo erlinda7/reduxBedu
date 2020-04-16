@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {TRAER_TODOS} from '../types/usuariosTypes'
 //vamos hacer una accion la cual el componente va llamar y esta accion va entregar algo
 
 //una funcion que va traer otra funcion .. son 2 funciones
@@ -7,9 +8,9 @@ import axios from 'axios';
 export const  traerTodos = () => async (dispatch)=>{
     
     const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-    
+
     dispatch ({
-        type :'traer_usuarios',  //en usuariosReducer hay un caso que es 'traer_usuarios' a este es a quien quiero llamar
+        type : TRAER_TODOS,  //en usuariosReducer hay un caso que es 'traer_usuarios' a este es a quien quiero llamar
         payload: respuesta.data
     })
 }

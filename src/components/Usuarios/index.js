@@ -9,7 +9,7 @@ class Usuarios extends Component {
 
   async componentDidMount() {
 
-    this.props.traerTodos();
+    this.props.traerTodos();  //llamando a la accion creators
     
   }
 
