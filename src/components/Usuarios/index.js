@@ -2,6 +2,7 @@ import React, { Component } from 'react'; //import Component
 import axios from 'axios';
 
 import { connect } from 'react-redux';//para poder conectar nuestro reducer al componente
+import * as usuariosActions from '../../actions/UsuariosActions';
 
 //cambiar const por class
 class Usuarios extends Component {
@@ -30,6 +31,7 @@ class Usuarios extends Component {
   );
   //necesito poner dentro de un render
   render() {
+    console.log(this.props);
     
     return (
       <div>
@@ -61,7 +63,7 @@ const mapStateToProps = (reducers) => {
 
 
 //conectando al almacenamiento global
-export default connect(mapStateToProps,{/*Actions */} )(Usuarios);
+export default connect(mapStateToProps, usuariosActions )(Usuarios);
 //parametros que debe recibir el connect
   //1ro: 
       //todos los reducers que el proveedor le va entregar al usuario,
