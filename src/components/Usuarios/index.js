@@ -1,5 +1,4 @@
 import React, { Component } from 'react'; //import Component
-import axios from 'axios';
 
 import { connect } from 'react-redux';//para poder conectar nuestro reducer al componente
 import * as usuariosActions from '../../actions/UsuariosActions';
@@ -8,15 +7,11 @@ import * as usuariosActions from '../../actions/UsuariosActions';
 class Usuarios extends Component {
 
 
-  // async componentDidMount() {
+  async componentDidMount() {
 
-  //   const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-
-
-  //   this.setState({
-  //     usuarios: respuesta.data
-  //   })
-  // }
+    this.props.traerTodos();
+    
+  }
 
   //ya no es necesario const
   ponerFilas = () => (
@@ -31,8 +26,6 @@ class Usuarios extends Component {
   );
   //necesito poner dentro de un render
   render() {
-    console.log(this.props);
-    
     return (
       <div>
         <table className="tabla">
