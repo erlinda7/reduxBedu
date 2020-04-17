@@ -5,13 +5,14 @@ import * as usuariosActions from '../../actions/UsuariosActions';
 import * as publicacionesActions from '../../actions/publicacionesActions';
 
 const {traerTodos: usuariosTraerTodos} = usuariosActions;
-const {traerTodos: publicacionesTraerTodos} = publicacionesActions;
+const {traerPorUsuario: publicacionesTraerPorUsuario} = publicacionesActions;
 
 export class Publicaciones extends Component{
-    componentDidMount(){
+    async componentDidMount(){
         if(!this.props.usuariosReducer.usuarios.length){ //sino tienes usuarios
-            this.props.usuariosTraerTodos()
+            await this.props.usuariosTraerTodos()
         }
+        this.props.publicacionesTraerPorUsuario(this.props.match.params.key);
     }
 
     render(){
@@ -39,6 +40,6 @@ const mapDispatchToProps = {
     //...publicacionesActions  //en ambas acciones tenemos un metodo traerTodos() , entonces agarra este ultimo y trae eso
 
         usuariosTraerTodos,                    //para que funcione bien traemos la des estructaramos y la renombramos
-        publicacionesTraerTodos
+        publicacionesTraerPorUsuario
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones);

@@ -21,3 +21,15 @@ export const traerTodos = () => async (dispatch) => {
         )
     }
 }
+
+//key id de params getState tener acceso al estado actual
+export const traerPorUsuario = (key) => async (dispatch, getState) => { 
+    //desestructurar
+    const {usuarios}= getState().usuariosReducer;
+    const usuario_id = usuarios[key].id;
+    const respuesta = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${usuario_id}`);
+    dispatch({
+        type: TRAER_TODOS,
+        payload: respuesta.data
+    })
+}
