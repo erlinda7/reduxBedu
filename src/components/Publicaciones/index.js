@@ -4,10 +4,13 @@ import {connect} from 'react-redux';
 import * as usuariosActions from '../../actions/UsuariosActions';
 import * as publicacionesActions from '../../actions/publicacionesActions';
 
+const {traerTodos: usuariosTraerTodos} = usuariosActions;
+const {traerTodos: publicacionesTraerTodos} = publicacionesActions;
+
 export class Publicaciones extends Component{
     componentDidMount(){
         if(!this.props.usuariosReducer.usuarios.length){ //sino tienes usuarios
-            this.props.traerTodos()
+            this.props.usuariosTraerTodos()
         }
     }
 
@@ -32,8 +35,10 @@ const mapStateToProps = ({usuariosReducer, publicacionesReducer}) =>{ //desestru
 
 //como estoy usando varias acciones necesito mapear
 const mapDispatchToProps = {
-    ...usuariosActions,  //me va entregar todo lo de publicacion accion
-    ...publicacionesActions
-}
+    //...usuariosActions,  //me va entregar todo lo de publicacion accion
+    //...publicacionesActions  //en ambas acciones tenemos un metodo traerTodos() , entonces agarra este ultimo y trae eso
 
+        usuariosTraerTodos,                    //para que funcione bien traemos la des estructaramos y la renombramos
+        publicacionesTraerTodos
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones);
