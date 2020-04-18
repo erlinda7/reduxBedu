@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Spinner from '../general/Spinner';
 import Fatal from '../general/Fatal';
@@ -10,7 +10,10 @@ import * as tareasActions from '../../actions/tareasActions';
 
 class Tareas extends Component {
     componentDidMount() {
-        this.props.traerTodas();
+        if (!Object.keys(this.props.tareas).length) {
+            this.props.traerTodas();
+        }
+
     }
 
     mostrarContenido = () => {
@@ -40,7 +43,7 @@ class Tareas extends Component {
         }
 
         return Object.keys(por_usuario).map((tar_id) => (
-            <div key ={tar_id}>
+            <div key={tar_id}>
                 <input type="checkbox" defaultChecked={por_usuario[tar_id].completed} />
                 {
                     por_usuario[tar_id].title
