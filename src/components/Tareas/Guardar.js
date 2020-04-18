@@ -15,6 +15,17 @@ class Guardar extends Component {
         
     }
 
+    guardar = ()=>{
+        const {usuario_id, titulo, agregar} = this.props;
+        const nuevaTarea = {
+            userId: usuario_id,
+            title: titulo,
+            completed:false
+        };
+
+        agregar(nuevaTarea);
+    }
+
 
     render() {
         return (
@@ -33,7 +44,9 @@ class Guardar extends Component {
                     onChange={this.cambioTitulo}
                 />
                 <br /><br />
-                <button>
+                <button 
+                 onClick={this.guardar}
+                >
                     Guardar
                 </button>
             </div>
