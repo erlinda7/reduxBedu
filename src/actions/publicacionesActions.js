@@ -87,3 +87,8 @@ export const abrirCerrar =(pub_key, com_key)=>(dispatch, getState)=>{
     })
 
 }
+
+
+export const traerComentarios = (pub_key, com_key) => (dispatch, getState)=>{
+
+}
