@@ -6,7 +6,7 @@ import Usuarios from './Usuarios';
 
 import Publicaciones from './Publicaciones';
 
-const Tareas = () => <div>Tareas</div>
+import Tareas from './Tareas';
 
 const App = () => (
   // deja navegar entre las pantallas
