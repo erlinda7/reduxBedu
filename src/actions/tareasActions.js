@@ -13,10 +13,21 @@ export const traerTodas = () => async (dispatch) => {
 
     try {
         const respuesta = await axios.get('https://jsonplaceholder.typicode.com/todos');
+        
 
+        //normalizar datos
+        const tareas = {};
+        respuesta.data.map((tar) => (
+            tareas[tar.userId] = { //a tareas estoy agregando un atributo userId
+                ...tareas[tar.userId],
+                [tar.id]: {  //pasarle un nuevo atributo
+                    ...tar
+                }
+            }
+        ));
         dispatch({
             type: TRAER_TODAS,  //en usuariosReducer hay un caso que es 'traer_usuarios' a este es a quien quiero llamar
-            payload: respuesta.data
+            payload: tareas
         })
     } catch (error) {
         console.log('Error:', error.message);
