@@ -12,6 +12,21 @@ import * as tareasActions from '../../actions/tareasActions';
 
 class Guardar extends Component {
 
+    componentDidMount() {
+        const {
+            match: { params: { usu_id, tar_id } },
+            tareas,
+            cambioUsuarioId,
+            cambioTitulo
+        } = this.props;
+
+        if (usu_id && tar_id) {
+            const tarea = tareas[usu_id][tar_id];
+            cambioUsuarioId(tarea.userId);
+            cambioTitulo(tarea.title);
+        }
+    }
+
     cambioUsuarioId = (event) => {
         this.props.cambioUsuarioId(event.target.value)
 
@@ -22,14 +37,36 @@ class Guardar extends Component {
     }
 
     guardar = () => {
-        const { usuario_id, titulo, agregar } = this.props;
+        const {
+            match: { params: { usu_id, tar_id } },
+            usuario_id,
+            tareas,
+            titulo,
+            agregar,
+            editar
+        } = this.props;
+
+
         const nuevaTarea = {
             userId: usuario_id,
             title: titulo,
             completed: false
         };
 
-        agregar(nuevaTarea);
+
+        if (usu_id && tar_id) {
+            const tarea = tareas[usu_id][tar_id];
+            const tarea_editada = {
+                ...nuevaTarea,
+                completed: tarea.completed,
+                id: tarea.id
+            }
+            editar(tarea_editada);
+        } else {
+
+            agregar(nuevaTarea);
+        }
+
     }
 
     deshabilitar = () => {
@@ -61,7 +98,7 @@ class Guardar extends Component {
         return (
             <div>
                 {
-                    (this.props.regresar? <Redirect to='/tareas'/>:'')
+                    (this.props.regresar ? <Redirect to='/tareas' /> : '')
                 }
                 <h1>Guardar Tarea</h1>
                 Usuario id:
