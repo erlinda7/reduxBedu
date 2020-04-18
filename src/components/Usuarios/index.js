@@ -13,9 +13,9 @@ class Usuarios extends Component {
 
 
   async componentDidMount() {
-
-    this.props.traerTodos();  //llamando a la accion creators
-
+    if(!this.props.usuarios.length){
+      this.props.traerTodos();  //llamando a la accion creators
+    }
   }
 
   ponerContenido = () => {
