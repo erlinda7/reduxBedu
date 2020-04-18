@@ -102,7 +102,8 @@ export class Publicaciones extends Component {
             >
                 <h2>{publicacion.title}</h2>
                 <h3>{publicacion.body}</h3>
-                {(publicacion.abierto ? <Comentarios /> : '')}
+                {(publicacion.abierto ? <Comentarios  comentarios= {publicacion.comentarios}/> : '')}{/*1ra forma mandar por props por herencia*/}
+                
             </div>
         ))
     );
