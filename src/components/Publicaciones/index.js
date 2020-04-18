@@ -23,8 +23,8 @@ export class Publicaciones extends Component {
             await usuariosTraerTodos()
         }
 
-        if(this.props.usuariosReducer.error){
-            return ;
+        if (this.props.usuariosReducer.error) {
+            return;
         }
 
         //si publicaciones_key ya esta no lo traigas
@@ -40,29 +40,60 @@ export class Publicaciones extends Component {
             match: { params: { key } }
         } = this.props;
 
-        if(usuariosReducer.error){
-            return <Fatal mensaje= {usuariosReducer.error}/>
+        if (usuariosReducer.error) {
+            return <Fatal mensaje={usuariosReducer.error} />
         }
 
-        if(!usuariosReducer.usuarios.length || usuariosReducer.cargando){
-            return <Spinner/>
+        if (!usuariosReducer.usuarios.length || usuariosReducer.cargando) {
+            return <Spinner />
         }
 
         const nombre = usuariosReducer.usuarios[key].name;
 
-        return(
-        <h1>Publicaciones de {nombre}</h1>
+        return (
+            <h1>Publicaciones de {nombre}</h1>
         )
     };
 
+    ponerPublicaciones = () => {
+        const {
+            usuariosReducer, //como no va tener cambio de estado lo podemos desestructurar
+            usuariosReducer: { usuarios },
+            publicacionesReducer,
+            publicacionesReducer: { publicaciones }, //tambien de publicacionesREducer necesito publicaciones
+            match: { params: { key } }
+        } = this.props;
+
+        if (!usuarios.length) return;
+        if (usuariosReducer.error) return;
+
+        if (publicacionesReducer.cargando) {
+            return <Spinner />;
+        }
+
+        if (publicacionesReducer.error) {
+            return <Fatal mensaje={publicacionesReducer.error} />
+        }
+
+        if (!publicaciones.length) return;
+
+        if (!('publicaciones_key' in usuarios[key])) return;
+
+        const { publicaciones_key } = usuarios[key];
+        return publicaciones[publicaciones_key].map((publicacion) => (
+            <div className="pub_titulo">
+                <h2>{publicacion.title}</h2>
+                <h3>{publicacion.body}</h3>
+            </div>
+        ))
+    }
     render() {
         console.log(this.props);
 
         return (
             <div>
-                
-                {this.props.match.params.key}
                 {this.ponerUsuario()}
+                {this.ponerPublicaciones()}
             </div>
         )
     }
