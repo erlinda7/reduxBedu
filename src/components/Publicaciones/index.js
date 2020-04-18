@@ -8,7 +8,7 @@ import * as usuariosActions from '../../actions/UsuariosActions';
 import * as publicacionesActions from '../../actions/publicacionesActions';
 
 const { traerTodos: usuariosTraerTodos } = usuariosActions;
-const { traerPorUsuario: publicacionesTraerPorUsuario } = publicacionesActions;
+const { traerPorUsuario: publicacionesTraerPorUsuario , abrirCerrar} = publicacionesActions;
 
 export class Publicaciones extends Component {
     async componentDidMount() {
@@ -80,17 +80,25 @@ export class Publicaciones extends Component {
         if (!('publicaciones_key' in usuarios[key])) return;
 
         const { publicaciones_key } = usuarios[key];
-        return publicaciones[publicaciones_key].map((publicacion) => (
+        return this.mostrarInfo(
+            publicaciones[publicaciones_key],
+            publicaciones_key
+        )
+        
+    }
+
+    mostrarInfo=(publicaciones, pub_key)=>(
+        publicaciones.map((publicacion, com_key) => (
             <div 
             className="pub_titulo"
             key ={publicacion.id}
-            onClick = {()=>alert(publicacion.id)}
+            onClick = {()=>this.props.abrirCerrar(pub_key, com_key)}
             >
                 <h2>{publicacion.title}</h2>
                 <h3>{publicacion.body}</h3>
             </div>
         ))
-    }
+    );
     render() {
         console.log(this.props);
 
@@ -116,6 +124,7 @@ const mapDispatchToProps = {
     //...publicacionesActions  //en ambas acciones tenemos un metodo traerTodos() , entonces agarra este ultimo y trae eso
 
     usuariosTraerTodos,                    //para que funcione bien traemos la des estructaramos y la renombramos
-    publicacionesTraerPorUsuario
+    publicacionesTraerPorUsuario,
+    abrirCerrar
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Publicaciones);
